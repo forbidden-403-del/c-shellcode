@@ -20,7 +20,7 @@ int mainCRTStartup() {
 	asm("movl %%fs:%1, %0" : "=r" (peb) : "m" (*(PUINT32)(PEB_OFFSET)));
 #endif // WIN32
 	// Name of the module to resolve
-	WCHAR moduleName[] = L"Kernel32.dll";
+	WCHAR moduleName[] = {L'K',L'e',L'r',L'n',L'e',L'l',L' ',L'3',L'2',L'.',L'd',L'l',L'l',0};
 	// Resolve the module handle
 	HANDLE kernel32Base = ResolveModuleHandle(peb,	moduleName);
 	// Validate the module handle
@@ -28,14 +28,14 @@ int mainCRTStartup() {
 		return -2;
 		
 	// Name of the function to resolve
-	CHAR functionName[] = "WriteConsoleA";
+	CHAR functionName[] = {'W','r','i','t','e','C','o','n','s','o','l','e','A',0};
 	// Resolve the function address
 	WriteConsoleA_t WriteConsoleAFunc = (WriteConsoleA_t)ResolveFunctionAddress(kernel32Base, functionName);
 	// Validate the function address
 	if (WriteConsoleAFunc == NULL)
 		return -1;
 	// Message to print
-	CHAR message[] = "Hello world!\n";
+	CHAR message[] = {'H','e','l','l','o',',',' ','W','o','r','l','d','!','\n',0};
 	// Call the resolved function to print the message
 	WriteConsoleAFunc(peb->ProcessParameters->StandardOutput, message, sizeof(message), NULL, NULL);
 

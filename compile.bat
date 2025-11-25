@@ -1,13 +1,13 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM === Target directory ===
-set MINGW_DIR=mingw64
-set INSTALL_SCRIPT=install_mingw.bat
-call "%INSTALL_SCRIPT%" || (
-        echo Install failed.
-        exit /b 1
-    )
+@REM REM === Target directory ===
+@REM set MINGW_DIR=mingw64
+@REM set INSTALL_SCRIPT=install_mingw.bat
+@REM call "%INSTALL_SCRIPT%" || (
+@REM         echo Install failed.
+@REM         exit /b 1
+@REM     )
 set "PATH=%CD%\%MINGW_DIR%\bin;%PATH%"
 
 :compile
