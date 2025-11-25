@@ -10,7 +10,7 @@
 - [Detection & Ethics Note](#detection--ethics-note)
 - [References](#references)
 
-This project demonstrates manual Windows API resolution and shellcode techniques in C, without including any standard Windows headers. All required types and structures (PEB, PE headers, etc.) are defined manually in src/types.h. The code locates the PEB, enumerates loaded modules to find Kernel32.dll, parses PE headers to resolve exported function addresses, and prints a message using only resolved addresses. No standard library or Windows headers are used—making it suitable for shellcode and low-level research. See the expanded README for step-by-step details and code samples.
+This project demonstrates manual Windows API resolution and shellcode techniques in C, without including any standard Windows headers. All required types and structures (PEB, PE headers, etc.) are defined manually in src/types.h. The code locates the PEB, enumerates loaded modules to find Kernel32.dll, parses PE headers to resolve exported function addresses, and prints a message using only resolved addresses. No standard library or Windows headers are usedï¿½making it suitable for shellcode and low-level research. See the expanded README for step-by-step details and code samples.
 
 ## Overview
 This project shows how to:
