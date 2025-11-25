@@ -77,7 +77,7 @@
 #endif // Check Compiler
 
 
-#ifdef _WIN64
+#ifdef ENVIRONMENT_x86_64
 	#define PEB_OFFSET 0x60
 #else // WIN32
 	#define PEB_OFFSET 0x30
