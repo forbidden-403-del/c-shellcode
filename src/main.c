@@ -14,7 +14,7 @@ int mainCRTStartup() {
 	PEB* peb;
 
 // Getting the PEB address from the registers
-#ifdef _WIN64
+#ifdef ENVIRONMENT_x86_64
 	asm("movq %%gs:%1, %0" : "=r" (peb) : "m" (*(PUINT64)(PEB_OFFSET)));
 #else // WIN32
 	asm("movl %%fs:%1, %0" : "=r" (peb) : "m" (*(PUINT32)(PEB_OFFSET)));
