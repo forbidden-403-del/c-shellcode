@@ -2,7 +2,6 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Features](#features)
 - [Supported Targets](#supported-targets)
 - [Cross-Platform Architecture](#cross-platform-architecture)
 - [Step-by-Step Guide](#step-by-step-guide)
@@ -12,26 +11,21 @@
 - [Detection & Ethics Note](#detection--ethics-note)
 - [References](#references)
 
-This project demonstrates manual Windows API resolution and position-independent shellcode techniques in C, without including any standard Windows headers or libraries. All required types and structures (PEB, PE headers, NT structures, etc.) are defined manually across multiple header files. The code locates the PEB, enumerates loaded modules to find Kernel32.dll, parses PE headers to resolve exported function addresses, and prints a message using only resolved addresses. No standard library, CRT, or Windows headers are used, and the project cross-compiles for multiple architectures (x86, x64, ARM64) and platforms (Windows, Linux) from a single codebase. See below for step-by-step details and code samples.
+This project demonstrates Windows API resolution and position-independent shellcode techniques in C, without including any standard Windows headers or libraries. All required types and structures (PEB, PE headers, NT structures, etc.) are defined in custom header files. The code locates the PEB, enumerates loaded modules to find Kernel32.dll, parses PE headers to resolve exported function addresses, and prints a message using only resolved addresses. No standard library, CRT, or Windows headers are used, and the project cross-compiles for multiple architectures (x86, x64, ARM64) and platforms (Windows, Linux) from a single codebase. See below for step-by-step details and code samples.
 
 ## Overview
 
-This project shows how to:
-- Manually locate the Process Environment Block (PEB)
-- Enumerate loaded modules to find the base address of `Kernel32.dll`
-- Parse PE headers to resolve the address of exported functions (e.g., `WriteConsoleA`)
-- Print a message to the console using only resolved addresses, without standard library calls
+This project demonstrates how to:
+- Locate the Process Environment Block (PEB)
+- Enumerate loaded modules
+- Parse PE headers to resolve exported function addresses
+- Print a message to the console using only resolved addresses
 - Cross-compile for multiple architectures and platforms
+- Extract raw shellcode from the `.text` section
 
-## Features
-
-- No reliance on standard Windows headers or libraries
-- No CRT or standard library dependencies
-- Custom type definitions and PE/NT structures
-- Works on x86, x64, and ARM64 architectures
-- Cross-compiles for Windows (PE) and Linux (ELF) targets
-- Extracts raw shellcode from `.text` section
-- Demonstrates techniques useful for shellcode and low-level Windows internals
+**Key characteristics:**
+- No reliance on standard Windows headers, CRT, or library dependencies
+- Custom type definitions and PE/NT structures defined from scratch
 
 ## Supported Targets
 
@@ -91,7 +85,7 @@ The project uses compile-time macros to detect and adapt to different architectu
 - Create your own type definitions for basic types (e.g., `DWORD`, `BYTE`, `HANDLE`)
 - Define necessary PE/NT structures in your own headers (see `src/primitives.h`, `src/peb.h`, `src/pe.h`)
 
-### 2. Manually Locate PEB and Kernel32.dll
+### 2. Locate PEB and Kernel32.dll
 - Use inline assembly to get the PEB address (architecture-specific)
 - Traverse the PEB to enumerate loaded modules and find the base address of `Kernel32.dll`
 
@@ -156,5 +150,3 @@ The project uses compile-time macros to detect and adapt to different architectu
 
 ## References
 
-- [Windows Internals - PEB Structure](https://docs.microsoft.com/en-us/windows/win32/api/winternl/ns-winternl-peb)
-- [PE Format Specification](https://docs.microsoft.com/en-us/windows/win32/debug/pe-format)
